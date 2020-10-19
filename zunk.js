@@ -2,11 +2,11 @@ import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
 import "./App.css";
 // to use Okta auth
-import { Security, SecureRoute, LoginCallback } from "@okta/okta-react";
+import { Security, SecureRoute, ImplicitCallback } from "@okta/okta-react";
 
 import NavBar from "./components/layout/NavBar.js";
-import Home from "./components/pages/HomePage.js";
-import User from "./components/pages/UserPage.js";
+import Home from "./components/pages/Home.js";
+import User from "./components/pages/User.js";
 import Login from "./components/auth/Login.js";
 
 function onAuthRequired({ history }) {
@@ -14,19 +14,10 @@ function onAuthRequired({ history }) {
 }
 
 class App extends Component {
-  // constructor(props) {
-  //   super(props);
-  //   this.onAuthRequired = this.onAuthRequired.bind(this);
-  // }
-
-  // onAuthRequired() {
-  //   this.props.history.push("/login");
-  // }
-
   render() {
     return (
       <Router>
-        {/*             for Okta auth */}
+        {/* for Okta auth */}
         <Security
           issuer="https://dev-7992170.okta.com/oauth2/default"
           clientId="0oa9uarb59m50KdRA5d5"
@@ -45,8 +36,8 @@ class App extends Component {
                 path="/login"
                 render={() => <Login baseUrl="https://dev-7992170.okta.com" />}
               />
-              <Route path="/implicit/callback" component={LoginCallback} />
-              {/* ^ for okta auth*/}
+              <Route path="/implicit/callback" component={ImplicitCallback} />
+              {/* ^ for okta auth */}
             </div>
           </div>
         </Security>
